@@ -9,8 +9,8 @@ lunar calendar data from their website.
 '''
 
 __license__ = 'BSD'
-__copyright__ = '2020, Chen Wei <weichen302@gmail.com>'
-__version__ = '0.0.3'
+__copyright__ = '2024, CarrotDLaw <carrotdlaw@gmail.com>'
+__version__ = '0.1.0'
 
 from io import StringIO
 from datetime import datetime
@@ -32,16 +32,16 @@ RE_CAL = re.compile('(\d{4})年(\d{1,2})月(\d{1,2})日')
 PROXY = None
 URL = 'https://www.hko.gov.hk/tc/gts/time/calendar/text/files/T%dc.txt'
 OUTPUT = os.path.join(APPDIR, 'chinese_lunar_%s_%s.ics')
-OUTPUT_JIEQI = os.path.join(APPDIR, 'jieqi_tch_%s_%s.ics')
+OUTPUT_JIEQI = os.path.join(APPDIR, 'solar_terms_icalendar_%s_%s.ics')
 
 ICAL_HEAD = ('BEGIN:VCALENDAR\n'
-             'PRODID:-//Chen Wei//Chinese Lunar Calendar//EN\n'
+             'PRODID:-//CarrotDLaw//Solar Terms iCalendar//EN\n'
              'VERSION:2.0\n'
              'CALSCALE:GREGORIAN\n'
              'METHOD:PUBLISH\n'
-             'X-WR-CALNAME:农历\n'
-             'X-WR-TIMEZONE:Asia/Shanghai\n'
-             'X-WR-CALDESC:中国农历1901-2100, 包括节气. 数据来自香港天文台')
+             'X-WR-CALNAME:廿四節氣\n'
+             'X-WR-TIMEZONE:Asia/Hong_Kong\n'
+             'X-WR-CALDESC:1901-2100 廿四節氣，數據來自香港天文台 | 1901-2100 Solar Terms, data from Hong Kong Observatory\n')
 
 ICAL_SEC = ('BEGIN:VEVENT\n'
             'DTSTAMP:%s\n'
@@ -237,12 +237,12 @@ def gen_cal_jieqi_only(start, end, fp):
     lines = [ICAL_HEAD]
     oneday = timedelta(days=1)
     for r in rows:
-        if not r['holiday'] and not r['jieqi']:
+        if not r['jieqi'] or r['jieqi'] == '清明':
             continue
 
         ld = []
-        if r['holiday']:
-            ld.append(r['holiday'])
+        # if r['holiday']:
+        #     ld.append(r['holiday'])
         if r['jieqi']:
             ld.append(r['jieqi'])
         uid = '%s-lc@infinet.github.io' % r['date']
@@ -395,7 +395,7 @@ def main():
         initdb()
         update_cal()
         post_process()  # fix error in HK data
-        update_holiday()
+        # update_holiday()
     if len(sys.argv) == 1:
         fp = OUTPUT % ('prev_year', 'next_year')
     else:
