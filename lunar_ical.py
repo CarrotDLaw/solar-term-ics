@@ -39,7 +39,7 @@ ICAL_HEAD = ('BEGIN:VCALENDAR\n'
              'VERSION:2.0\n'
              'CALSCALE:GREGORIAN\n'
              'METHOD:PUBLISH\n'
-             'X-WR-CALNAME:廿四節氣\n'
+             'X-WR-CALNAME:廿四節氣 Solar Terms\n'
              'X-WR-TIMEZONE:Asia/Hong_Kong\n'
              'X-WR-CALDESC:1901-2100 廿四節氣，數據來自香港天文台 | 1901-2100 Solar Terms, data from Hong Kong Observatory\n')
 
