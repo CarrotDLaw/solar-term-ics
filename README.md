@@ -47,8 +47,6 @@ copy is include in the file COPYRIGHT.
 **Hong Kong Observatory** has been very kind to provide and grant the permission
 of using their conversion table, which is only for Non-Commercial use.
 
-[Contact me](mailto: carrotdlaw@gmail.com)
-
 [iCal]: https://raw.github.com/infinet/lunar-calendar/master/chinese_lunar_prev_year_next_year.ics
 [HK_Obs]: http://data.weather.gov.hk/gts/time/conversion1_text_c.htm
 [Screenshot]: http://infinet.github.io/images/lunar_calendar.jpg
