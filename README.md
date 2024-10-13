@@ -42,7 +42,7 @@ therefor the computed lunar calendar may not represent history accurately.
 ### Licence
 
 This package is released under the terms and conditions of the BSD License, a
-copy is include in the file COPYRIGHT.
+copy is include in the file LICENSE.
 
 **Hong Kong Observatory** has been very kind to provide and grant the permission
 of using their conversion table, which is only for Non-Commercial use.
