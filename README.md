@@ -1,78 +1,8 @@
-## iCalendar格式的农历 节气 及传统节日
+# iCalendar (`.ics`) 廿四節氣日曆 Solar Terms Calendar
 
-iCalendar是一种通用的日历交换格式，很多软件和设备，比如google calendar, apple
-calendar, thunderbird + lightning插件, iphone/ipad, 安卓都支持。
+## Usage
 
-以前订过iCalendar格式农历日历，但慢慢地它们都停止了更新。所幸香港天文台为公众提
-供了从1901年到2100年间两百年的农历-公历对照表，也就是这里用到的数据。
-
-![Screenshot][]
-
-下面是覆盖去年、今年以及明年三年的日历[ics文件][iCal]链接，把它加入到你最常用的
-软件就可以了。
-
-[https://raw.github.com/infinet/lunar-calendar/master/chinese_lunar_prev_year_next_year.ics][iCal]
-
-苹果设备上应该是:
-    设置 => 邮件、通讯录、日历 => 添加账户 => 其它 => 日历 添加已订阅日历
-
-如果在Mac的*iCal*里订阅到iCloud，这个日历还可以自动推送到所有使用那个iCloud
-账户的ios设备。
-
-
-### 系统要求
-
- * Python: python 3.5上测试可用
-
- * [Numpy][] 和 [Numexpr][]: 纯Python速度较慢，而天文算法特别是完全版的VSOP87和LEA-406计算量尤其大，所以最好配合Numpy以加快计算速度。
-
-
-### 生成更长时段农历
-
-如果需要更长时段的农历，请先克隆本项目。
-
-直接运行`./lunar_ical.py`会从香港天文台抓取1901到2100年间所有数据，然后生成上面
-那个前后三年时段的农历ics文件；
-
-使用参数--start和--end指定需要的起至日期, 例如:
-
-    ./lunar_ical.py --start=2010-05-01 --end=2021-12-31
-
-超出1901-2100的农历数据使用VSOP87行星理论和LEA-406月球理论生成. 以香港天文台的
-数据(更新于2014年)为标准，用此法生成的1949到2100年间农历有两处不一致：
-
- 1）1979-01-20 大寒
-
- 2）2057-09-29 农历九月全部日期错位一天
-
-不一致的原因在于上面两处节气及新月正好跨越午夜时分，差距数秒就能影响该节气或新月的
-发生日期。由于使用不同的行星位置计算方法和Delta T估算方法，出现这种差异在所难免。
-
-
-### C 版本
-
-C版本速度更快，但暂时只在终端上输出ical。用户必须使用`>`将stdout的结果导入到指定文件以生成ical文件。
-
-编译：
-
-    $ cd c
-    $ make
-
-运行:
-
-    #生成某年农历
-    $ ./lunarcal 2016 > chinese_lunar_2016.ics
-
-    #生成数年农历
-    $ ./lunarcal 2016 2019 > chinese_lunar_2016_2019.ics
-
-### 版权
-
-本项目版权使用BSD协议，请参见所附COPYRIGHT文件。
-
-感谢[香港天文台][HK_Obs]为公众提供并授权本项目使用其农历-公历对照数据，该部分数据仅限非商业用途。
-
-
+Copy the link https://raw.githubusercontent.com/CarrotDLaw/solar-term-ics/refs/heads/master/solar_terms_icalendar_1901-01-01_2100-12-31.ics and paste it in the calendar subscription settings.
 
 ## Chinese Lunar Calendar
 
@@ -109,7 +39,7 @@ The official timezone before 1949 is slightly different than the current UTC +8
 therefor the computed lunar calendar may not represent history accurately.
 
 
-### License
+### Licence
 
 This package is released under the terms and conditions of the BSD License, a
 copy is include in the file COPYRIGHT.
@@ -117,46 +47,7 @@ copy is include in the file COPYRIGHT.
 **Hong Kong Observatory** has been very kind to provide and grant the permission
 of using their conversion table, which is only for Non-Commercial use.
 
-
-### Requirement:
-
- * Python: tested on python 3.5
-
- * [Numpy][] and [Numexpr][]: Only needed when generate calendar by astronomical
-  algorithm. The full version of LEA-406 and VSOP87 is rather slow when compute
-  in pure python.
-
-
-### How to run
-
-Run `lunar_ical`, it will fetch data from Hong Kong Observatory, save
-the data to a local sqlite database, then use that database to generate a ics
-file, which covers from the previous to the end of next year.
-
-Try the Chinese Lunar Calendar by add this [ics file][iCal] to your favorite
-calendar app.
-
-Start and end date can also be specified as command line options, for example:
-
-    ./lunar_ical.py --start=1990-01-01 --end=2001-01-01
-
-The date must in ISO format.
-
-
-### C port
-
-There is also a C version under directory "c". Run `make` to generate the
-executable `lunarcal`. Run `lunarcal` with year will print out the Chinese Lunar
-Calendar in ical format to the terminal. Use `>` to redirect the output to a file, for example:
-
-    # Specific year
-    $ ./lunarcal 2016 > chinese_lunar_2016.ics
-
-    # or multiple years
-    $ ./lunarcal 2016 2019 > chinese_lunar_2016_2019.ics
-
-
-[Contact me](mailto: weichen302@gmail.com)
+[Contact me](mailto: carrotdlaw@gmail.com)
 
 [iCal]: https://raw.github.com/infinet/lunar-calendar/master/chinese_lunar_prev_year_next_year.ics
 [HK_Obs]: http://data.weather.gov.hk/gts/time/conversion1_text_c.htm
